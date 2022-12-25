@@ -1,11 +1,12 @@
 #include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 /* Estruturas */
 
 typedef struct vertice {
+    int id;
     int parent;
     int rank;
 } Vertice;
@@ -44,36 +45,47 @@ void treeUnion(int v1, int v2) {
     link(findSet(v1), findSet(v2));
 }
 
-/*bool weightComparator(Edge e1, Edge e2) {
+bool weightComparator(Edge e1, Edge e2) {
     return e1.weight > e2.weight;
-}*/
+}
 
-//int adaptedKruskal(Edge graph[], int numVertices, int numEdges) {
-//    int sum = 0;
-//    /* Performs "makeSet" on every vertice */
-//    for (Edge e : graph) {
-//        makeSet(e.vertice1);
-//        makeSet(e.vertice2);
-//    }
+int adaptedKruskal() {
+    int sum = 0;
 
-//    /*std::sort(graph, graph + numEdges, weightBigger); */
-//    for (Edge e : graph)
-//        if (findSet(e.vertice1) != findSet(e.vertice2)) {
-//            sum += e.weight;
-//            treeUnion(e.vertice1, e.vertice2);
-//        }
+    for (Vertice v : vertices) {
+        makeSet(v.id);
+    }
 
-//    return sum;
-//}
+    std::sort(edges.begin(), edges.end(), weightComparator);
+    for (Edge e : edges)
+        if (findSet(e.vertice1) != findSet(e.vertice2)) {
+            sum += e.weight;
+            treeUnion(e.vertice1, e.vertice2);
+        }
+
+    return sum;
+}
 
 int main() {
-    int numVertices, numEdges;
+    int numVertices, numEdges, v1, v2, weight;
     cin >> numVertices >> numEdges;
 
-    Edge graph[numEdges];
-    for (int i = 0; i < numEdges; i++)
-        cin >> graph[i].vertice1 >> graph[i].vertice2 >> graph[i].weight;
+    for (int i = 1; i <= numVertices; i++) {
+        Vertice v;
+        v.id = i;
+        vertices.push_back(v);
+    }
 
-    cout << "teste 4 :)" << endl;
+    for (int i = 0; i < numEdges; i++) {
+        cin >> v1 >> v2 >> weight;
+        Edge e;
+        e.vertice1 = v1;
+        e.vertice2 = v2;
+        e.weight = weight;
+        edges.push_back(e);
+    }
+
+    cout << adaptedKruskal() << endl;
+
     return 0;
 }
