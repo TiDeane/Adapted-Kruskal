@@ -6,7 +6,6 @@ using namespace std;
 /* Estruturas */
 
 typedef struct vertice {
-    int id;
     int parent;
     int rank;
 } Vertice;
@@ -28,7 +27,7 @@ void makeSet(int V) {
 int findSet(int V) {
     if (vertices[V].parent != V)
         vertices[V].parent = findSet(vertices[V].parent);
-    return V;
+    return vertices[V].parent;
 }
 
 void link(int v1, int v2) {
@@ -51,12 +50,10 @@ bool weightComparator(Edge e1, Edge e2) {
 
 int adaptedKruskal() {
     int sum = 0;
-
-    for (Vertice v : vertices) {
-        makeSet(v.id);
-    }
-
+   
+   // Sorts all edges from heaviest to lightest
     std::sort(edges.begin(), edges.end(), weightComparator);
+    
     for (Edge e : edges)
         if (findSet(e.vertice1) != findSet(e.vertice2)) {
             sum += e.weight;
@@ -70,11 +67,13 @@ int main() {
     int numVertices, numEdges, v1, v2, weight;
     cin >> numVertices >> numEdges;
 
-    for (int i = 1; i <= numVertices; i++) {
-        Vertice v;
-        v.id = i;
-        vertices.push_back(v);
-    }
+    vertices.resize(numVertices);
+    edges.resize(numEdges);
+
+    // Performs "makeSet" on every vertice.
+    // The vertice "1" is on vertices[0], "2" is on vertices[1], etc.
+    for (int i = 0; i < numVertices; i++)
+        makeSet(i);
 
     for (int i = 0; i < numEdges; i++) {
         cin >> v1 >> v2 >> weight;
@@ -82,7 +81,7 @@ int main() {
         e.vertice1 = v1;
         e.vertice2 = v2;
         e.weight = weight;
-        edges.push_back(e);
+        edges[i] = e;
     }
 
     cout << adaptedKruskal() << endl;
