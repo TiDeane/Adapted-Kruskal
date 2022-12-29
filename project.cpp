@@ -80,10 +80,10 @@ long adaptedKruskal()
     return sum;
 }
 
-long main()
+int main()
 {
     long numVertices, numEdges, v1, v2, weight;
-    if (scanf("%d %d", &numVertices, &numEdges) != 2)
+    if (scanf("%ld %ld", &numVertices, &numEdges) != 2)
     {
         exit(1);
     }
@@ -98,7 +98,7 @@ long main()
 
     for (long i = 0; i < numEdges; i++)
     {
-        if (scanf("%d %d %d", &v1, &v2, &weight) != 3)
+        if (scanf("%ld %ld %ld", &v1, &v2, &weight) != 3)
         {
             exit(1);
         }
@@ -109,7 +109,7 @@ long main()
         edges[i] = e;
     }
 
-    printf("%d\n", adaptedKruskal());
+    printf("%ld\n", adaptedKruskal());
 
     return 0;
 }
