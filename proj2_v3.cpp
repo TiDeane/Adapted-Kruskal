@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdio.h>
 #include <algorithm>
 #include <vector> 
 
@@ -72,9 +72,7 @@ int adaptedKruskal() {
 
 int main() {
     int numVertices, numEdges, v1, v2, weight;
-    std::ios::sync_with_stdio(false);
-    
-    cin >> numVertices >> numEdges;
+    scanf("%d %d", &numVertices, &numEdges);
 
     vertices.resize(numVertices);
     edges.resize(numEdges);
@@ -85,7 +83,7 @@ int main() {
         makeSet(i);
 
     for (int i = 0; i < numEdges; i++) {
-        cin >> v1 >> v2 >> weight;
+        scanf("%d %d %d", &v1, &v2, &weight);
         Edge e;
         e.vertice1 = v1;
         e.vertice2 = v2;
@@ -93,7 +91,7 @@ int main() {
         edges[i] = e;
     }
 
-    cout << adaptedKruskal() << endl;
+    printf("%d\n", adaptedKruskal());
 
     return 0;
 }
