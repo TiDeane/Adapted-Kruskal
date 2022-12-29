@@ -5,14 +5,14 @@
 /* Structures */
 
 typedef struct vertice {
-    int parent;
-    int rank;
+    long long unsigned parent;
+    long long unsigned rank;
 } Vertice;
 
 typedef struct edge {
-    int vertice1;
-    int vertice2;
-    int weight;
+    long long unsigned vertice1;
+    long long unsigned vertice2;
+    long long unsigned weight;
 } Edge;
 
 /* Global vectors */
@@ -20,20 +20,20 @@ typedef struct edge {
 std::vector<Vertice> vertices;
 std::vector<Edge> edges;
 
-/* Functions */
+/* Functions*/
 
-void makeSet(int V) {
+void makeSet(long long unsigned V) {
     vertices[V].parent = V;
     vertices[V].rank = 0;
 }
 
-int findSet(int V) {
+long long unsigned findSet(long long unsigned V) {
     if (vertices[V].parent != V)
         vertices[V].parent = findSet(vertices[V].parent);
     return vertices[V].parent;
 }
 
-void link(int v1, int v2) {
+void link(long long unsigned v1, long long unsigned v2) {
     if (vertices[v1].rank > vertices[v2].rank)
         vertices[v2].parent = v1;
     else {
@@ -43,7 +43,7 @@ void link(int v1, int v2) {
     }
 }
 
-void treeUnion(int v1, int v2) {
+void treeUnion(long long unsigned v1, long long unsigned v2) {
     link(findSet(v1), findSet(v2));
 }
 
@@ -53,8 +53,8 @@ bool weightComparator(Edge e1, Edge e2) {
 
 // Performs Kruskal's algorithm but from heavist to lightest, and instead of
 // adding edges to the MST, it simply adds their weight to "sum"
-int adaptedKruskal() {
-    int sum = 0;
+long long unsigned adaptedKruskal() {
+    long long unsigned sum = 0;
    
     // Sorts all edges from heaviest to lightest
     std::sort(edges.begin(), edges.end(), weightComparator);
@@ -69,19 +69,19 @@ int adaptedKruskal() {
 }
 
 int main() {
-    int numVertices, numEdges, v1, v2, weight;
-    scanf("%d %d", &numVertices, &numEdges);
+    long long unsigned numVertices, numEdges, v1, v2, weight;
+    scanf("%lld %lld", &numVertices, &numEdges);
 
     vertices.resize(numVertices);
     edges.resize(numEdges);
 
     // Performs "makeSet" on every vertice.
     // The vertice "1" is on vertices[0], "2" is on vertices[1], etc.
-    for (int i = 0; i < numVertices; i++)
+    for (long long unsigned i = 0; i < numVertices; i++)
         makeSet(i);
 
-    for (int i = 0; i < numEdges; i++) {
-        scanf("%d %d %d", &v1, &v2, &weight);
+    for (long long unsigned i = 0; i < numEdges; i++) {
+        scanf("%lld %lld %lld", &v1, &v2, &weight);
         Edge e;
         e.vertice1 = v1;
         e.vertice2 = v2;
@@ -89,7 +89,7 @@ int main() {
         edges[i] = e;
     }
 
-    printf("%d\n", adaptedKruskal());
+    printf("%lld\n", adaptedKruskal());
 
     return 0;
 }
