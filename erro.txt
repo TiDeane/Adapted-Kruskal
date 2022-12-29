@@ -1,0 +1,12 @@
+__libc_start_call_main (main=main@entry=0x555555555655 <main()>, argc=argc@entry=1, argv=argv@entry=0x7fffffffdd88) at ../sysdeps/nptl/libc_start_call_main.h:74
+74      ../sysdeps/nptl/libc_start_call_main.h: No such file or directory.
+(gdb) n
+munmap_chunk(): invalid pointer
+
+Program received signal SIGABRT, Aborted.
+__pthread_kill_implementation (no_tid=0, signo=6, threadid=140737348204352) at ./nptl/pthread_kill.c:44
+44      ./nptl/pthread_kill.c: No such file or directory.
+(gdb) n
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
