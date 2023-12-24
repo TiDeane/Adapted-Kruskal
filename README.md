@@ -1,4 +1,4 @@
-IST Analysis and Synthesis of Algorithms second course project, 2022/2023. In this project, each vertice in a graph represents a region and each weight represents the value of the commercial exchanges between the 2 regions. The code uses an adapted version of Kruskal's algorithm to find the maximum value of commercial exchanges while minimizing the infrastructure costs (i.e. number of edges).
+IST Analysis and Synthesis of Algorithms' second course project, 2022/2023. In this project, each vertice in a graph represents a region and each weight represents the value of the commercial exchanges between the 2 regions. The code uses an adapted version of Kruskal's algorithm to find the maximum value of commercial exchanges while minimizing the infrastructure costs (i.e. number of edges).
 
 ##  Input
 
